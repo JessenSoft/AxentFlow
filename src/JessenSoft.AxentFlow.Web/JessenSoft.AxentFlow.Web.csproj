@@ -6,4 +6,16 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="DevExpress.Xpo" Version="22.1.6" />
+    <PackageReference Include="DynamicData" Version="9.2.1" />
+    <PackageReference Include="MudBlazor" Version="8.5.1" />
+    <PackageReference Include="ReactiveUI.Blazor" Version="20.2.45" />
+    <PackageReference Include="ReactiveUI.Fody" Version="19.5.41" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JessenSoft.AxentFlow.UI\JessenSoft.AxentFlow.UI.csproj" />
+  </ItemGroup>
+
 </Project>

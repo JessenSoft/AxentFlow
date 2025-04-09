@@ -1,0 +1,7 @@
+﻿@page "/demo"
+@inject DemoViewModel ViewModel
+
+<MudTextField T="string" @bind-Value="ViewModel.TextInput" Label="Eingabe" />
+<MudButton OnClick="@(() => ViewModel.SubmitCommand.Execute().Subscribe())">
+    Submit
+</MudButton>

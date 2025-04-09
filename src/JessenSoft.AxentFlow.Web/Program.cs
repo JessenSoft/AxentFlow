@@ -1,13 +1,25 @@
-using JessenSoft.AxentFlow.Web.Data;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
+﻿using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
+
+// 🧩 Add MudBlazor services
+builder.Services.AddMudServices();
+
+// 🧠 Add ReactiveUI ViewModels
+builder.Services.AddScoped<DemoViewModel>();
+
+// 🔐 Placeholder for authentication
+// builder.Services.AddAuthentication().AddCookie();
+// builder.Services.AddAuthorization();
+
+// 🌐 Add HTTP client(s) if needed
+builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.Environment.EnvironmentName) });
+
+// Optional: add logging, configuration, multitenancy middleware, etc.
 
 var app = builder.Build();
 
@@ -15,15 +27,16 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
-
 app.UseStaticFiles();
 
 app.UseRouting();
+
+// 🔐 app.UseAuthentication();
+// 🔐 app.UseAuthorization();
 
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
