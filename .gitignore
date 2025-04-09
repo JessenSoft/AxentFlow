@@ -398,3 +398,18 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# === Custom additions ===
+
+# Runtime logs
+*.log
+
+# Secrets
+secrets.json
+
+# Exported assets
+*.pdf
+*.svg
+
+# Rider IDE
+.idea/
