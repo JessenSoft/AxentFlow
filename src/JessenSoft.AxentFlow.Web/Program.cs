@@ -1,4 +1,7 @@
-﻿using JessenSoft.AxentFlow.UI.ViewModels;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.EntityFrameworkCore;
+using JessenSoft.AxentFlow.Infrastructure.Persistence;
+using JessenSoft.AxentFlow.UI.ViewModels;
 using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,19 +13,34 @@ builder.Services.AddServerSideBlazor();
 // 🧩 Add MudBlazor services
 builder.Services.AddMudServices();
 
+// 🗃 Add EF Core with SQLite
+builder.Services.AddDbContext<AxentFlowDbContext>(options =>
+    options.UseSqlite("Data Source=axentflow.db"));
+
 // 🧠 Add ReactiveUI ViewModels
 builder.Services.AddScoped<DemoViewModel>();
+
+// 🌐 Add HttpClient with NavigationManager for base URI
+builder.Services.AddScoped(sp =>
+{
+    var navigation = sp.GetRequiredService<NavigationManager>();
+    return new HttpClient { BaseAddress = new Uri(navigation.BaseUri) };
+});
 
 // 🔐 Placeholder for authentication
 // builder.Services.AddAuthentication().AddCookie();
 // builder.Services.AddAuthorization();
 
-// 🌐 Add HTTP client(s) if needed
-builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.Environment.EnvironmentName) });
-
-// Optional: add logging, configuration, multitenancy middleware, etc.
+// Optional: logging, multitenancy, etc.
 
 var app = builder.Build();
+
+// 🌱 Apply database migrations (optional, dev only)
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AxentFlowDbContext>();
+    db.Database.Migrate();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\JessenSoft.AxentFlow.Infrastructure\JessenSoft.AxentFlow.Infrastructure.csproj" />
     <ProjectReference Include="..\JessenSoft.AxentFlow.UI\JessenSoft.AxentFlow.UI.csproj" />
   </ItemGroup>
 
