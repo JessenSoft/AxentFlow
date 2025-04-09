@@ -1,4 +1,5 @@
-﻿using MudBlazor.Services;
+﻿using JessenSoft.AxentFlow.UI.ViewModels;
+using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

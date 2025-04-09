@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\JessenSoft.AxentFlow.Core\JessenSoft.AxentFlow.Core.csproj" />
+  </ItemGroup>
+
 </Project>
