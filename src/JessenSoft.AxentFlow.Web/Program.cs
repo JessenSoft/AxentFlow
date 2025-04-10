@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Components;
-using Microsoft.EntityFrameworkCore;
-using JessenSoft.AxentFlow.Infrastructure.Persistence;
+﻿using JessenSoft.AxentFlow.Infrastructure.Persistence;
 using JessenSoft.AxentFlow.UI.ViewModels;
+using Microsoft.AspNetCore.Components;
+using Microsoft.EntityFrameworkCore;
 using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);

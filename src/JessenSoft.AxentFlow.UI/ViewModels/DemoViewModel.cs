@@ -13,7 +13,7 @@ public class DemoViewModel : ReactiveObject
     /// <summary>
     /// User-entered text, bound to the input field.
     /// </summary>
-    [Reactive] public string TextInput { get; set; }
+    [Reactive] public string TextInput { get; set; } = "";
 
     /// <summary>
     /// Command that gets triggered on submit.
