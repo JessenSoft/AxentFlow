@@ -1,0 +1,28 @@
+﻿@page "/workflows/create"
+
+<PageTitle>Workflow erstellen</PageTitle>
+
+<MudPaper Class="p-6 mx-auto" Style="max-width: 600px;">
+    <MudText Typo="Typo.h5" Class="mb-4">Neuen Workflow anlegen</MudText>
+
+    <EditForm Model="@Vm" OnValidSubmit="@(() => Vm.SaveCommand.Execute().Subscribe())">
+        <MudTextField @bind-Value="Vm.Name" Label="Name" Required="true" />
+        <MudTextField @bind-Value="Vm.Description" Label="Beschreibung" Lines="3" />
+
+        <MudSelect T="WorkflowStatus" Label="Status" @bind-Value="Vm.Status">
+            <MudSelectItem Value="WorkflowStatus.Draft">Entwurf</MudSelectItem>
+            <MudSelectItem Value="WorkflowStatus.Active">Aktiv</MudSelectItem>
+            <MudSelectItem Value="WorkflowStatus.Archived">Archiviert</MudSelectItem>
+        </MudSelect>
+
+        <MudButton Variant="Variant.Filled"
+                   Color="Color.Primary"
+                   Disabled="@(!Vm.CanSave)"
+                   Loading="@Vm.IsSaving"
+                   OnClick="@(() => Vm.SaveCommand.Execute().Subscribe())"
+                   Class="mt-4">
+            <MudIcon Icon="@Icons.Material.Filled.Save" Class="me-2" />
+            Speichern
+        </MudButton>
+    </EditForm>
+</MudPaper>

@@ -1,8 +1,12 @@
-﻿using JessenSoft.AxentFlow.Infrastructure.Persistence;
+﻿using JessenSoft.AxentFlow.Application.Interfaces;
+using JessenSoft.AxentFlow.Infrastructure.Extensions;
+using JessenSoft.AxentFlow.Infrastructure.Persistence;
+using JessenSoft.AxentFlow.Infrastructure.Services;
 using JessenSoft.AxentFlow.UI.ViewModels;
 using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
 using MudBlazor.Services;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +23,7 @@ builder.Services.AddDbContext<AxentFlowDbContext>(options =>
 
 // 🧠 Add ReactiveUI ViewModels
 builder.Services.AddScoped<DemoViewModel>();
+builder.Services.AddViewModels(Assembly.GetExecutingAssembly());
 
 // 🌐 Add HttpClient with NavigationManager for base URI
 builder.Services.AddScoped(sp =>
@@ -26,6 +31,9 @@ builder.Services.AddScoped(sp =>
     var navigation = sp.GetRequiredService<NavigationManager>();
     return new HttpClient { BaseAddress = new Uri(navigation.BaseUri) };
 });
+
+// 💼 Register application services
+builder.Services.AddScoped<IWorkflowService, WorkflowService>();
 
 // 🔐 Placeholder for authentication
 // builder.Services.AddAuthentication().AddCookie();
