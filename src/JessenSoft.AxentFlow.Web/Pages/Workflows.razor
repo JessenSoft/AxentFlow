@@ -1,0 +1,36 @@
+﻿@page "/workflows"
+
+<PageTitle>Workflows</PageTitle>
+
+<MudPaper Class="p-4">
+    <MudGrid Class="mb-4">
+        <MudItem xs="6">
+            <MudText Typo="Typo.h5">Workflows</MudText>
+        </MudItem>
+        <MudItem xs="6" Class="d-flex justify-end">
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="CreateNewWorkflow">
+                <MudIcon Icon="@Icons.Material.Filled.Add" />
+                Neu
+            </MudButton>
+        </MudItem>
+    </MudGrid>
+
+    <MudTextField @bind-Value="SearchText" Placeholder="Suche..." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" Class="mb-4" />
+
+    <MudTable Items="FilteredWorkflows" Hover="true">
+        <HeaderContent>
+            <MudTh>Name</MudTh>
+            <MudTh>Beschreibung</MudTh>
+            <MudTh>Status</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Name">@context.Name</MudTd>
+            <MudTd DataLabel="Beschreibung">@context.Description</MudTd>
+            <MudTd DataLabel="Status">
+                <MudChip T="string" Color="@(context.IsActive ? Color.Success : Color.Default)">
+                    @(context.IsActive ? "Aktiv" : "Inaktiv")
+                </MudChip>
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
+</MudPaper>
