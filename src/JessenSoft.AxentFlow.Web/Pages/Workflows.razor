@@ -8,28 +8,40 @@
             <MudText Typo="Typo.h5">Workflows</MudText>
         </MudItem>
         <MudItem xs="6" Class="d-flex justify-end">
-            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="CreateNewWorkflow">
+            <MudButton Variant="Variant.Filled" 
+                       Color="Color.Primary"
+                       Href="/workflows/create">
                 <MudIcon Icon="@Icons.Material.Filled.Add" />
                 Neu
             </MudButton>
         </MudItem>
     </MudGrid>
 
-    <MudTextField @bind-Value="SearchText" Placeholder="Suche..." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" Class="mb-4" />
+    <MudTextField Label="Suche"
+                  @bind-Value="@Vm.SearchText"
+                  Immediate="true"
+                  Adornment="Adornment.Start"
+                  AdornmentIcon="@Icons.Material.Filled.Search" />
 
-    <MudTable Items="FilteredWorkflows" Hover="true">
+
+    <MudTable Items="Vm.FilteredWorkflows"
+              Hover="true"
+              Dense="true"
+              Class="mt-4">
+
         <HeaderContent>
             <MudTh>Name</MudTh>
             <MudTh>Beschreibung</MudTh>
             <MudTh>Status</MudTh>
+            <MudTh>Schritte</MudTh>
         </HeaderContent>
+
         <RowTemplate>
-            <MudTd>@context.Name</MudTd>
-            <MudTd>@context.Description</MudTd>
-            <MudTd>
-                <MudChip T="string">@context.Status</MudChip>
-            </MudTd>
-            <MudTd>@context.Steps.Count</MudTd>
+            <MudTd DataLabel="Name">@context.Name</MudTd>
+            <MudTd DataLabel="Beschreibung">@context.Description</MudTd>
+            <MudTd DataLabel="Status">@context.Status</MudTd>
+            <MudTd DataLabel="Schritte">@context.Steps.Count</MudTd>
         </RowTemplate>
+
     </MudTable>
 </MudPaper>

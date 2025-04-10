@@ -1,36 +1,19 @@
-﻿using JessenSoft.AxentFlow.Application.Interfaces;
-using JessenSoft.AxentFlow.Core.Models;
+﻿using JessenSoft.AxentFlow.Web.ViewModels.Workflows;
 using Microsoft.AspNetCore.Components;
-using MudBlazor;
+using System.Reactive.Linq;
 
 namespace JessenSoft.AxentFlow.Web.Pages
 {
+    /// <summary>
+    /// Code-behind der Workflows-Seite.
+    /// </summary>
     public partial class Workflows : ComponentBase
     {
-        [Inject] private IWorkflowService WorkflowService { get; set; } = default!;
-        [Inject] protected NavigationManager Navigation { get; set; } = default!;
-
-        protected string SearchText { get; set; } = string.Empty;
-
-        protected List<WorkflowDefinition> WorkflowList = new();
-
-        protected IEnumerable<WorkflowDefinition> FilteredWorkflows =>
-        string.IsNullOrWhiteSpace(SearchText)
-            ? WorkflowList
-            : WorkflowList.Where(w =>
-                w.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
-                (w.Description ?? "").Contains(SearchText, StringComparison.OrdinalIgnoreCase));
+        [Inject] public WorkflowsViewModel Vm { get; set; } = default!;
 
         protected override async Task OnInitializedAsync()
         {
-            WorkflowList = (await WorkflowService.GetAllAsync())
-                .Where(w => w.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase))
-                .ToList();
-        }
-
-        protected void CreateNewWorkflow()
-        {
-            Navigation.NavigateTo("/workflows/create");
+            await Vm.LoadCommand.Execute();
         }
     }
 }
