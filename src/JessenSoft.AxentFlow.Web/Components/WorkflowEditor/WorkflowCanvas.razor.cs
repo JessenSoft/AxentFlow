@@ -47,7 +47,7 @@ namespace JessenSoft.AxentFlow.Web.Components.WorkflowEditor
                 PositionY = e.ClientY - _offsetY
             });
 
-            _pendingNodeType = null;
+            _pendingNodeType = null; 
         }
 
         /// <summary>
