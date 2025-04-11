@@ -66,3 +66,46 @@ a, .btn-link {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+.workflow-editor {
+    display: flex;
+    height: calc(100vh - 64px);
+}
+
+.workflow-canvas {
+    flex: 1;
+    position: relative;
+    background-color: #f8f9fa;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.node {
+    position: absolute;
+    cursor: grab;
+    z-index: 1;
+    user-select: none;
+}
+
+.node-palette {
+    width: 200px;
+    background-color: #e6e6e6;
+    padding: 1rem;
+    border-right: 1px solid #ccc;
+}
+
+.palette-item {
+    cursor: grab;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    background: #e8f5e9;
+}
+
+.properties-panel {
+    position: absolute;
+    top: 70px;
+    right: 2rem;
+    width: 300px;
+    z-index: 10;
+    padding: 1rem;
+}

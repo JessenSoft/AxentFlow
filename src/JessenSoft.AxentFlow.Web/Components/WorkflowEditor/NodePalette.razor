@@ -1,0 +1,21 @@
+﻿<MudPaper Class="p-2">
+    <MudText Typo="Typo.h6">Knotenpalette</MudText>
+
+    @foreach (var type in NodeTypes)
+    {
+        <div class="d-flex align-items-center mb-1">
+            <MudChip T="string" Class="me-2" Color="Color.Primary">@type</MudChip>
+            <MudButton Variant="Variant.Outlined"
+                       Size="Size.Small"
+                       OnClick="() => OnAddClicked.InvokeAsync(type)">
+                Hinzufügen
+            </MudButton>
+        </div>
+    }
+</MudPaper>
+
+@code {
+    [Parameter] public EventCallback<string> OnAddClicked { get; set; }
+
+    private string[] NodeTypes = new[] { "Start", "HttpRequest", "End" };
+}

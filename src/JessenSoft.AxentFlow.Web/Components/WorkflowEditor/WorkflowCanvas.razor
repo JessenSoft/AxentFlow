@@ -1,0 +1,36 @@
+﻿<div class="workflow-editor">
+    <NodePalette OnAddClicked="SetPendingNodeType" />
+
+    <div class="workflow-canvas"
+         @onmouseup="EndDrag"
+         @onmousemove="DragNode"
+         @onclick="CanvasClick"
+    @ondragover:preventDefault>
+
+        @foreach (var node in Vm.Nodes)
+        {
+            <div class="node"
+                 style="left:@(node.PositionX)px; top:@(node.PositionY)px;"
+                 @ondblclick="() => Vm.SelectNode(node)"
+                 @onmousedown="(e) => StartDrag(e, node)">
+                <MudPaper Class="p-2">
+                    <strong>@node.Label</strong>
+                </MudPaper>
+            </div>
+        }
+
+        @if (!string.IsNullOrEmpty(PendingNodeType))
+        {
+            <div class="canvas-hint">Klicke auf das Canvas, um „@PendingNodeType“ zu platzieren</div>
+        }
+    </div>
+
+    @if (Vm.SelectedNode is not null)
+    {
+        <MudPaper Class="properties-panel">
+            <h6>Eigenschaften: @Vm.SelectedNode.Type</h6>
+            <MudTextField Label="Name" @bind-Value="Vm.SelectedNode.Label" />
+            <MudButton OnClick="Vm.ClearSelection" Variant="Variant.Outlined">Schließen</MudButton>
+        </MudPaper>
+    }
+</div>
